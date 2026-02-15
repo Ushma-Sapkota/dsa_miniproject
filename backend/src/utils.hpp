@@ -7,6 +7,14 @@
 
 using namespace std;
 
+// Trim whitespace from both ends of a string
+string trim(const string& str) {
+    size_t first = str.find_first_not_of(" \t\r\n");
+    if (first == string::npos) return "";
+    size_t last = str.find_last_not_of(" \t\r\n");
+    return str.substr(first, (last - first + 1));
+}
+
 // Decode URL-encoded strings
 string urlDecode(const string& encodeUrl) {
     string decodeUrl = "";
@@ -60,11 +68,16 @@ map<string, string> parseQueryParams(const string& query){
 
 // Extract path from HTTP request
 string extractPath(const string& request){ 
-    size_t start = request.find("GET") + 4;
-    size_t end = request.find("HTTP/");
+   size_t start = request.find("GET");
+    if (start == string::npos) return "/";
     
-    if (start != string::npos && end != string::npos){
+    start += 4; // Skip "GET "
+    size_t end = request.find(" HTTP/", start);
+    
+    if (end != string::npos){
         string fullPath = request.substr(start, end - start);
+        fullPath = trim(fullPath); // Trim whitespace
+        
         size_t questionPosition = fullPath.find('?');
         
         // Return path without query parameters
@@ -80,11 +93,16 @@ string extractPath(const string& request){
 
 // Extract query string from HTTP request
 string extractQueryString(const string& request){
-    size_t start = request.find("GET") + 4;
-    size_t end = request.find("HTTP/");
+    size_t start = request.find("GET");
+    if (start == string::npos) return "";
     
-    if (start != string::npos && end != string::npos){
+    start += 4; // Skip "GET "
+    size_t end = request.find(" HTTP/", start);
+    
+    if (end != string::npos){
         string fullPath = request.substr(start, end - start);
+        fullPath = trim(fullPath); // Trim whitespace
+        
         size_t questionPosition = fullPath.find('?');
         
         // Return everything after the '?'

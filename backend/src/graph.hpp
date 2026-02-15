@@ -50,7 +50,7 @@ class Graph{
     }
 
     void addEdge(int from, int to, int weight, string pathType="walkway"){
-        if(from >= 0 && from < nodes.size() && to >= 0 && to < nodes.size()){
+        if(from >= 0 && from < (int)nodes.size() && to >= 0 && to < (int)nodes.size()){
             adjMatrix[from][to] = weight;
             adjMatrix[to][from] = weight;
             edges.push_back(Edge(from, to, weight, pathType));
@@ -84,7 +84,7 @@ class Graph{
 
     vector<int> getNeighbors(int nodeId) const{
         vector<int> neighbors;
-        for(int i=0; i< nodes.size(); i++){
+        for(size_t i=0; i< nodes.size(); i++){
             if(adjMatrix[nodeId][i]>0){
                 neighbors.push_back(i);
             }
