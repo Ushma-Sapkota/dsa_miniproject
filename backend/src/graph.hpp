@@ -106,8 +106,8 @@ Graph createCampusGraph(){
     g.addNode(5, "Hostel", 400, 350, "hostel");
     g.addNode(6, "Parking Lot", 650, 350, "parking");
     g.addNode(7, "Football Ground", 850, 350, "sports");
-    g.addNode(8, "Garden", 500, 550, "leisure");
-    g.addNode(9, "Laboratory", 500, 650, "lab"); 
+    g.addNode(8, "Laboratory", 500, 550, "lab");
+    
 
     // Add paths
     g.addEdge(0, 1, 150, "walkway"); // Admin to library
@@ -120,10 +120,9 @@ Graph createCampusGraph(){
     g.addEdge(4, 5, 240, "road"); // Cafeteria to Hostel
     g.addEdge(5, 6, 230, "walkway"); // Hostel to Parking Lot
     g.addEdge(6, 7, 190, "walkway"); // Parking Lot to Ground
-    g.addEdge(5, 8, 210, "walkway"); // Hostel to Garden
-    g.addEdge(6, 8, 180, "walkway"); // Parking Lot to Garden
-    g.addEdge(8, 9, 120, "walkway"); // Garden to Lab
-    g.addEdge(7, 9, 400, "road"); // Ground to lab
+    g.addEdge(5, 8, 210, "walkway"); // Hostel to Lab
+    g.addEdge(6, 8, 180, "walkway"); // Parking Lot to Lab
+   
     
     return g;
 }
